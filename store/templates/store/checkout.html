@@ -17,7 +17,7 @@
 
                 <div class="shipping-info">
                     <hr>
-                    <p>Shopping Information:</p>
+                    <p>Shipping Information:</p>
                     <hr>
                     <div class="form-field">
                          <input required class="form-control" type="text" name="address" placeholder="Adress...">
@@ -139,6 +139,9 @@
                  .then((data) => {
                     console.log('Success:',data);
                     alert('Transaction completed');
+
+                    cart ={}
+                    document.cookie = 'cart=' +JSON.stringify(cart) + ";domain=;path=/"
                     window.location.href ="{% url 'store' %}"
                  })
 
