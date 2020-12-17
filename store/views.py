@@ -1,11 +1,54 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-
+from django.contrib.auth.forms import UserCreationForm
+from.forms import CreateUserForm
 from .utils import cookieCart, cartData, guestOrder
+from django.contrib import messages
+from  django.contrib.auth import authenticate,logout,login
 # Create your views here.
+
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+        form = CreateUserForm()
+
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account is created for  '+ user)
+                return redirect('login')
+    context = {'form': form}
+    return render(request, 'store/register.html', context)
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request,username=username,password=password)
+
+            if user is not None:
+                login(request,user)
+                return redirect('store')
+            else:
+                messages.info(request, 'Username or Password is incorrect.')
+
+    context={}
+    return render(request, 'store/login.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('store')
 
 def store(request):
     data = cartData(request)
@@ -25,7 +68,6 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
-
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']

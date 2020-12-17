@@ -41,8 +41,9 @@
         </div>
         <br>
 			<div class="box-element hidden" id="payment-info">
-				<small>Paypal Options</small>
-                 <div id="paypal-button-container"></div>
+				<small>Paypal Option</small>
+
+                 <div id="paypal-button-container"> </div>
 <!--                <button id="make-payment" >Make Payment</button>-->
     </div>
     </div>
@@ -66,7 +67,7 @@
     </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AY8yNV3gnQ6sKlbw3LEpcYCsDZMCaGAceu6WocOIrCzQ28ImHS3CqqsPkMW01nSM7goPI_5CxJdSbwiW&currency=USD&disable-funding=credit"></script>
 
 
 <script>
@@ -95,8 +96,7 @@
                 // Finalize the transaction
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
-                        // Show a success message to the buyer
-                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                       submitFormData()
                     });
                 }
 
@@ -106,7 +106,7 @@
 
 <script type="text/javascript">
     var shipping = '{{ order.shipping }}'
-
+<!--    var total = '{{ order.get_cart_total }}'-->
 
     if(shipping == 'False'){
         document.querySelector('.shipping-info').innerHTML=''

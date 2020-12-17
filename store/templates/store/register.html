@@ -1,0 +1,39 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+           <div class="col-lg-6">
+           <div class="box-element"  id="form-wrapper">
+            <form id="form" method="POST">
+                   {% csrf_token %}
+                    <h1>Sign Up</h1>
+                    <hr>
+                    <div class="form-field">
+                        {{ form.username }}
+                    </div><br>
+                    <div class="form-field">
+                          {{ form.email }}
+                    </div><br>
+                    <div class="form-field">
+                          {{ form.password1 }}
+                    </div><br>
+                    <div class="form-field">
+                          {{ form.password2 }}
+                    </div><br><br>
+
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Sign Up">
+            </form><br>
+               {{ form.errors }}
+               Already have account-<a href="{% url 'login' %}">Login</a>
+        </div>
+           </div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

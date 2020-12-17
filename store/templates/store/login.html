@@ -1,0 +1,38 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+           <div class="col-lg-6">
+           <div class="box-element"  id="form-wrapper">
+            <form id="form" method="POST">
+                   {% csrf_token %}
+                    <h1>Log In</h1>
+                    <hr>
+                    <div class="form-field">
+                        <input required class="form-control" type="text"  name="username" placeholder="Username...">
+                    </div><br>
+                    <div class="form-field">
+                        <input required class="form-control" type="password"  name="password" placeholder="Password...">
+                    </div>
+
+
+                   <input id="form-button" class="btn btn-success btn-block" type="submit" value="Log In">
+            </form><br>
+               {% for message in messages %}
+               <p>{{ message }}</p>
+               {% endfor %}
+               Don't have account-<a href="{% url 'register' %}">Sign Up</a>
+               <br>
+               Forget Password-<a href="{% url 'password_reset' %}">Reset Password</a>
+        </div>
+           </div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

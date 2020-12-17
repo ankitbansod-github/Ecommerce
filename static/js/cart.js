@@ -49,7 +49,7 @@ function updateUserOrder(productId,action){
         method : 'POST',
         headers :{
           'Content-Type' : 'application/jason',
-          'x-CSRFToken':csrftoken,
+          'X-CSRFToken':csrftoken,
         },
         body:JSON.stringify({'productId':productId, 'action':action})
     })
