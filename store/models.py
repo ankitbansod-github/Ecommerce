@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -27,6 +28,11 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+    def get_absolute_url(self):
+        return reverse ('product_detail', kwargs={
+            'product_id':self.id
+        })
 
 
 class Order(models.Model):
