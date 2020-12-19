@@ -1,6 +1,8 @@
 # Ecommerce
 It is an Ecommerce website built  with Django framework.
 
+![Ecom-Google-Chrome-2020-12-18-15 (1)](https://user-images.githubusercontent.com/65574977/102687082-826da380-4212-11eb-9794-0113ac4d27cf.gif)
+
 
 ## Running this Project 
 
